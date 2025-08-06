@@ -6,6 +6,7 @@ const Loading = lazy(() => import('@/components/shared/loading'));
 const MainLayout = lazy(() => import('@/components/layouts/main'));
 const Home = lazy(() => import('@/components/contents/home'));
 const About = lazy(() => import('@/components/contents/about'));
+const Categories = lazy(() => import('@/components/contents/categories'));
 const Quiz = lazy(() => import('@/components/contents/quiz'));
 const Contact = lazy(() => import('@/components/contents/contact'));
 
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
 				path: '/start-quiz',
 				element: (
 					<Suspense fallback={<Loading />}>
+						<Categories />
+					</Suspense>
+				),
+			},
+			{
+				path: '/quiz',
+				element: (
+					<Suspense fallback={<Loading />}>
 						<Quiz />
 					</Suspense>
 				),
@@ -49,7 +58,7 @@ const router = createBrowserRouter([
 						<Contact />
 					</Suspense>
 				),
-			}
+			},
 		],
 	},
 ]);
