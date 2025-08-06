@@ -133,7 +133,7 @@
     @apply text-xl sm:text-2xl lg:text-4xl font-bold text-center sm:text-start;
   }
   .description{
-    @apply text-sm lg:text-lg text-center sm:text-start
+    @apply text-sm/8 lg:text-lg/8 text-center sm:text-start
   }
   .field-about {
     @apply flex flex-col gap-4;

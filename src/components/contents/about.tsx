@@ -1,4 +1,4 @@
-import { AboutLayout } from '@/components/layouts/about';
+import { HomeLayout } from '@/components/layouts/home';
 import { motion } from 'motion/react';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function AboutContents() {
 	const AboutIntroduction = 'Introduction';
 	return (
-		<AboutLayout>
+		<HomeLayout id="about" className="py-8">
 			<div className="flex flex-col gap-4">
 				<div className="grid  sm:grid-cols-2 gap-4 h-full">
 					<motion.div
@@ -38,13 +38,13 @@ function AboutContents() {
 							</h1>
 							<p className="description sm:!text-justify">
 								Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking, Cloud,
+								Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills.
 								<br /> <br />
-								Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills. Whether you are preparing for a certification, brushing up on your technical
+								Whether you are preparing for a certification, brushing up on your technical expertise, or simply looking for a challenge, our quizzes are crafted to be both informative and enjoyable.
 								<br /> <br />
-								expertise, or simply looking for a challenge, our quizzes are crafted to be both informative and enjoyable. With regularly updated questions and a variety of difficulty levels, you can track your progress,
+								With regularly updated questions and a variety of difficulty levels, you can track your progress, identify your strengths, and discover areas for improvement.
 								<br /> <br />
-								identify your strengths, and discover areas for improvement. Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Quiz App — where knowledge meets
-								challenge.
+								Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Quiz App — where knowledge meets challenge.
 							</p>
 						</div>
 					</div>
@@ -68,7 +68,7 @@ function AboutContents() {
 					</p>
 				</motion.div>
 			</div>
-		</AboutLayout>
+		</HomeLayout>
 	);
 }
 

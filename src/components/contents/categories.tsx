@@ -1,4 +1,4 @@
-import { CategoriesLayout } from '@/components/layouts/categories';
+import { HomeLayout } from '@/components/layouts/home';
 import { motion } from 'motion/react';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
@@ -91,7 +91,7 @@ function QuizContents() {
 	}, [dropdown]);
 
 	return (
-		<CategoriesLayout>
+		<HomeLayout id="categories" className='py-8'>
 			<div className="flex flex-col sm:grid sm:grid-cols-4 gap-4">
 				<div className="sm:col-span-1 flex flex-col gap-4 sm:gap-8">
 					<h2 className="text-lg sm:text-2xl font-bold">Difficulty:</h2>
@@ -144,7 +144,7 @@ function QuizContents() {
 					<ImageGroups difficulty={diff} />
 				</div>
 			</div>
-		</CategoriesLayout>
+		</HomeLayout>
 	);
 }
 

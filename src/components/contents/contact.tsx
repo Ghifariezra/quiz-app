@@ -1,12 +1,12 @@
-import {ContactLayout} from '@/components/layouts/contact';
+import { HomeLayout } from '@/components/layouts/home';
 // import { motion } from 'motion/react';
 import { memo } from 'react';
 
 function Contents() {
 	return (
-		<ContactLayout>
+		<HomeLayout id="contact" className='py-8'>
 			<h1>Contact</h1>
-		</ContactLayout>
+		</HomeLayout>
 	);
 }
 
