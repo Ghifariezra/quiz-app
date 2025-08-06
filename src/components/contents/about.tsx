@@ -1,6 +1,7 @@
 import { AboutLayout } from '@/components/layouts/about';
 import { motion } from 'motion/react';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 function AboutContents() {
 	const AboutIntroduction = 'Introduction';
@@ -35,7 +36,7 @@ function AboutContents() {
 									</motion.span>
 								))}
 							</h1>
-							<p className="description justify">
+							<p className="description sm:!text-justify">
 								Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking, Cloud,
 								<br /> <br />
 								Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills. Whether you are preparing for a certification, brushing up on your technical
@@ -56,13 +57,13 @@ function AboutContents() {
 					<h2 className="text-lg font-semibold mb-2">Data Source</h2>
 					<p className="text-sm">
 						All quiz questions are powered by{' '}
-						<a href="https://quizapi.io/docs/1.0/overview" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+						<Link to="https://quizapi.io/docs/1.0/overview" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
 							QuizAPI.io
-						</a>
+						</Link>
 						, an open quiz API for developers. Learn more in their{' '}
-						<a href="https://quizapi.io/docs/1.0/overview" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+						<Link to="https://quizapi.io/docs/1.0/overview" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
 							official documentation
-						</a>
+						</Link>
 						.
 					</p>
 				</motion.div>

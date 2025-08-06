@@ -1,26 +1,23 @@
 import { ModeToggle } from '@/components/mode-toggle';
 import { motion } from 'motion/react';
 import { memo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const LogoComponent = memo(() => {
 	const LogoName = 'Quiz App';
-	const navigate = useNavigate();
-
-	const handleLogoClick = useCallback(() => {
-		navigate('/');
-	}, [navigate]);
 
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-2xl font-bold cursor-pointer" onClick={handleLogoClick}>
-			{LogoName.split('').map((letter, index) => (
-				<motion.span key={index} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.05 }}>
-					{letter}
-				</motion.span>
-			))}
-		</motion.div>
+		<Link to={'/'}>
+			<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-2xl font-bold cursor-pointer">
+				{LogoName.split('').map((letter, index) => (
+					<motion.span key={index} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.05 }}>
+						{letter}
+					</motion.span>
+				))}
+			</motion.div>
+		</Link>
 	);
 });
 
@@ -31,28 +28,18 @@ const MenuComponent = memo(() => {
 		{ name: 'Quiz', path: '/start-quiz' },
 		{ name: 'Contact', path: '/contact' },
 	];
-
-	const navigate = useNavigate();
-
-	const handleMenuClick = useCallback(
-		(path: string) => {
-			navigate(path);
-		},
-		[navigate]
-	);
-
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className={`flex flex-col gap-2 sm:flex-row sm:gap-4 text-lg font-medium`}>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className={`flex flex-col gap-2 sm:flex-row sm:gap-4 text-lg font-medium items-center`}>
 			{Menus.map((menu, index) => (
-				<motion.button
-					key={index}
-					initial={{ opacity: 0, y: -10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.3, delay: index * 0.05 }}
-					onClick={() => handleMenuClick(menu.path)}
-					className="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer text-sm md:text-base duration-500 ease-in-out">
-					{menu.name}
-				</motion.button>
+				<Link to={menu.path} key={index}>
+					<motion.button
+						initial={{ opacity: 0, y: -10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.3, delay: index * 0.05 }}
+						className="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer text-sm md:text-base duration-500 ease-in-out">
+						{menu.name}
+					</motion.button>
+				</Link>
 			))}
 		</motion.div>
 	);
@@ -79,17 +66,12 @@ function Header() {
 				</div>
 			</motion.div>
 			{isOpen && (
-				<motion.div 
-					initial={{ opacity: 0 }} 
-					animate={{ opacity: 1 }} 
-					transition={{ duration: 1 }} 
-					className="sm:hidden block py-4"
-				>
+				<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="sm:hidden block py-4">
 					<MenuComponent />
 				</motion.div>
 			)}
 		</header>
 	);
-};
+}
 
 export default memo(Header);
