@@ -2,9 +2,9 @@ import { HomeLayout } from '@/components/layouts/home';
 import { motion } from 'motion/react';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { AboutTitle } from '@/components/common/about/title';
 
 function AboutContents() {
-	const AboutIntroduction = 'Introduction';
 	return (
 		<HomeLayout id="about" className="py-8">
 			<div className="flex flex-col justify-center items-center gap-4">
@@ -20,22 +20,7 @@ function AboutContents() {
 					/>
 					<div className="field-about">
 						<div className="field-about">
-							<h1 className="head">
-								{AboutIntroduction.split('').map((word, index) => (
-									<motion.span
-										key={index}
-										initial={{ opacity: 0, y: -10 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{
-											duration: 0.3,
-											delay: index * 0.1,
-											ease: 'easeInOut',
-											repeat: 1,
-										}}>
-										{word}
-									</motion.span>
-								))}
-							</h1>
+							<AboutTitle />
 							<p className="description sm:!text-justify">
 								Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking, Cloud,
 								Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills.

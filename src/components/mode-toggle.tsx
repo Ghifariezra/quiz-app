@@ -14,7 +14,7 @@ export function ModeToggle() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button onClick={toggleTheme} variant="outline" size="icon" className="cursor-pointer duration-300 ease-in">
+				<Button onClick={toggleTheme} variant="outline" size="icon" className="cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 duration-500 ease-in">
 					{theme === 'dark' ? <Moon /> : <Sun />}
 				</Button>
 			</DropdownMenuTrigger>

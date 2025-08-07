@@ -1,35 +1,9 @@
 import { HomeLayout } from '@/components/layouts/home';
 import { motion } from 'motion/react';
-import { Button } from '@/components/ui/button';
+import { ButtonGroups } from '@/components/common/home/button';
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
-
-type ButtonConfig = {
-	name: string;
-	href: string;
-	variant: 'default' | 'outline';
-	className: string;
-};
-
-const Buttons: ButtonConfig[] = [
-	{ name: 'Start Quiz', href: '/start-quiz', variant: 'default', className: 'hover:scale-105 cursor-pointer' },
-	{ name: 'Learn More', href: '/about', variant: 'outline', className: 'hover:scale-105 cursor-pointer' },
-];
-
-const ButtonGroups = ({ handleButtonClick }: { handleButtonClick: (path: string) => void }) => {
-	return (
-		<div className="flex gap-4 w-fit place-self-center sm:place-self-start">
-			{Buttons.map((button, index) => (
-				<motion.div key={index} initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: 'easeInOut', delay: index * 0.5 }}>
-					<Button variant={button.variant as ButtonConfig['variant']} className={button.className} onClick={() => handleButtonClick(button.href)}>
-						{button.name}
-					</Button>
-				</motion.div>
-			))}
-		</div>
-	);
-};
 
 function HomeContents () {
 	const navigate = useNavigate();
