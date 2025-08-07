@@ -7,7 +7,7 @@ function AboutContents() {
 	const AboutIntroduction = 'Introduction';
 	return (
 		<HomeLayout id="about" className="py-8">
-			<div className="flex flex-col gap-4">
+			<div className="flex flex-col justify-center items-center gap-4">
 				<div className="grid  sm:grid-cols-2 gap-4 h-full">
 					<motion.div
 						initial={{ opacity: 0, x: -10 }}

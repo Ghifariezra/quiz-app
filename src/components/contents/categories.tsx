@@ -49,7 +49,7 @@ const ImageGroups = memo(({ difficulty }: { difficulty: string }) => {
 				<Link
 					to={{
 						pathname: '/quiz',
-						search: `?category=${image.title}&difficulty=${difficulty.toLowerCase()}`,
+						search: `?category=${image.title}&difficulty=${difficulty}`,
 					}}
 					key={index}>
 					<motion.div

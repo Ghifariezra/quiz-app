@@ -42,7 +42,7 @@ function HomeContents () {
 	);
 
 	return (
-		<HomeLayout>
+		<HomeLayout id="home">
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div className="flex flex-col justify-center gap-8 p-4 sm:order-1 order-2">
 					<h1 className="head">Quiz App - Test Your Knowledge in Linux, DevOps, Cloud & More</h1>
