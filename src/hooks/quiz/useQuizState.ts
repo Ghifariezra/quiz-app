@@ -53,6 +53,8 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         if (index > 0) {
             setIndex((prev) => prev - 1);
         }
+        // Bug fix when Double click Back button
+        return;
     }, [index]);
 
     // Fungsi untuk menyelesaikan kuis

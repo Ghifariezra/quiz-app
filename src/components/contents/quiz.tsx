@@ -1,5 +1,5 @@
 import { HomeLayout } from '@/components/layouts/home';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { memo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -24,18 +24,7 @@ function QuizContents() {
 	});
 
 	// Memanggil custom hook untuk mengelola state dan handler
-	const { 
-		index, 
-		answers, 
-		handleSelectAnswer, 
-		handleFinish,
-		handleNextWithScroll,
-		handleBackWithScroll,
-        questionContainerRef,
-		totalQuestions,
-		progress
-	 } = useQuizState({ data } as { data: Record<string, string>[] });
-
+	const { index, answers, handleSelectAnswer, handleFinish, handleNextWithScroll, handleBackWithScroll, questionContainerRef, totalQuestions, progress } = useQuizState({ data } as { data: Record<string, string>[] });
 
 	if (isLoading)
 		return (
@@ -113,26 +102,30 @@ function QuizContents() {
 
 					{/* Navigation Buttons */}
 					<div className="flex justify-end gap-4">
-						{index > 0 && (
-							<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-								<Button className="cursor-pointer" onClick={handleBackWithScroll}>
-									Back
-								</Button>
-							</motion.div>
-						)}
-						{index === totalQuestions - 1 ? (
-							<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-								<Button className="cursor-pointer" onClick={handleFinish}>
-									Submit
-								</Button>
-							</motion.div>
-						) : (
-							<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-								<Button className="cursor-pointer" onClick={handleNextWithScroll} disabled={index >= totalQuestions - 1}>
-									Next
-								</Button>
-							</motion.div>
-						)}
+						<AnimatePresence mode="wait">
+							{index > 0 && (
+								<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: 'easeInOut' }} exit={{ opacity: 0, y: 10 }}>
+									<Button className="cursor-pointer" onClick={handleBackWithScroll}>
+										Back
+									</Button>
+								</motion.div>
+							)}
+						</AnimatePresence>
+						<AnimatePresence mode="wait">
+							{index === totalQuestions - 1 ? (
+								<motion.div key="submit" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.7, ease: 'easeInOut' }}>
+									<Button className="cursor-pointer" onClick={handleFinish}>
+										Submit
+									</Button>
+								</motion.div>
+							) : (
+								<motion.div key="next" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.7, ease: 'easeInOut' }}>
+									<Button className="cursor-pointer" onClick={handleNextWithScroll} disabled={index >= totalQuestions - 1}>
+										Next
+									</Button>
+								</motion.div>
+							)}
+						</AnimatePresence>
 					</div>
 				</div>
 			</div>
