@@ -13,7 +13,7 @@ function AboutContents() {
 						initial={{ opacity: 0, x: -10 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{
-							duration: 2,
+							duration: 1,
 							ease: 'easeInOut',
 						}}
 						className='bg-[url("/question.png")] aspect-video sm:aspect-square bg-contain bg-no-repeat bg-center'
@@ -22,14 +22,22 @@ function AboutContents() {
 						<div className="field-about">
 							<AboutTitle />
 							<p className="description sm:!text-justify">
-								Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking, Cloud,
-								Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills.
+								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.2 }}>
+									Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking,
+									Cloud, Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills.
+								</motion.span>
 								<br /> <br />
-								Whether you are preparing for a certification, brushing up on your technical expertise, or simply looking for a challenge, our quizzes are crafted to be both informative and enjoyable.
+								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.3 }}>
+									Whether you are preparing for a certification, brushing up on your technical expertise, or simply looking for a challenge, our quizzes are crafted to be both informative and enjoyable.
+								</motion.span>
 								<br /> <br />
-								With regularly updated questions and a variety of difficulty levels, you can track your progress, identify your strengths, and discover areas for improvement.
+								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.4 }}>
+									With regularly updated questions and a variety of difficulty levels, you can track your progress, identify your strengths, and discover areas for improvement.
+								</motion.span>
 								<br /> <br />
-								Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Quiz App — where knowledge meets challenge.
+								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.5 }}>
+									Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Quiz App — where knowledge meets challenge.
+								</motion.span>
 							</p>
 						</div>
 					</div>
@@ -37,7 +45,7 @@ function AboutContents() {
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					transition={{ duration: 1, ease: 'easeInOut', delay: 0.5 }}
+					transition={{ duration: 1, ease: 'easeInOut', delay: 0.6 }}
 					className="mt-6 p-4 rounded-md bg-gray-100 dark:bg-gray-800 shadow-md shadow-black/10 dark:shadow-white/10">
 					<h2 className="text-lg font-semibold mb-2">Data Source</h2>
 					<p className="text-sm">
