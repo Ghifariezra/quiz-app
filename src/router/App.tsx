@@ -8,6 +8,8 @@ const Home = lazy(() => import('@/components/contents/home'));
 const About = lazy(() => import('@/components/contents/about'));
 const Categories = lazy(() => import('@/components/contents/categories'));
 const Quiz = lazy(() => import('@/components/contents/quiz'));
+const FinishProtectedRoute = lazy(() => import('@/components/contents/finish/protect-route'));
+const Finish = lazy(() => import('@/components/contents/finish/finish'));
 const Contact = lazy(() => import('@/components/contents/contact'));
 
 const router = createBrowserRouter([
@@ -46,6 +48,16 @@ const router = createBrowserRouter([
 			{
 				path: '/quiz',
 				Component: Quiz,
+			},
+			{
+				path: '/quiz/finish',
+				element: (
+					<Suspense fallback={<Loading />}>
+						<FinishProtectedRoute>
+							<Finish />
+						</FinishProtectedRoute>
+					</Suspense>
+				),
 			},
 			{
 				path: '/contact',

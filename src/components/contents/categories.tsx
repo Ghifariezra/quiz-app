@@ -5,8 +5,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ImageQuiz, Difficultys } from '@/utilities/categories';
 import { memo } from 'react';
 import { DifficultyDropdown } from '@/components/common/categories/dropdown';
-import { CategoryTitle } from '@/components/common/categories/title';
-
+import { Title } from '@/components/common/title';
 
 function QuizContents() {
 	const [diff, setDiff] = useState<string>(Difficultys[0]);
@@ -39,7 +38,7 @@ function QuizContents() {
 					</div>
 				</div>
 				<div className="sm:col-span-3 flex flex-col gap-8">
-					<CategoryTitle />
+					<Title letters={"Categories"} />
 					<ImageGroups ImageQuiz={ImageQuiz} difficulty={diff} />
 				</div>
 			</div>
