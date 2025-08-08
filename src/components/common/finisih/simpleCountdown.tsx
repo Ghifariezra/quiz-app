@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function SimpleCountdown({ duration }: { duration: number }) {
+const SimpleCountdown = ({ duration }: { duration: number }) => {
 	const navigate = useNavigate();
 
 	const [secondsLeft, setSecondsLeft] = useState(() => {
@@ -46,3 +46,5 @@ export default function SimpleCountdown({ duration }: { duration: number }) {
 		</div>
 	);
 }
+
+export default SimpleCountdown;
