@@ -1,11 +1,11 @@
 import { HomeLayout } from '@/components/layouts/home';
 import { motion } from 'motion/react';
-import { memo, useState, useCallback, useEffect } from 'react';
+import { memo, useState, useCallback, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { fetchData } from '@/services/quiz-data';
+import QuizData from '@/services/quiz-data';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import SimpleCountdown from '@/components/common/timer/simpleCountdown';
@@ -14,35 +14,44 @@ import { AlarmClock } from 'lucide-react';
 import type { AnswerType } from '@/types/quiz';
 
 function QuizContents() {
-	const [index, setIndex] = useState(0);
+	const { fetchData } = QuizData;
+	const [index, setIndex] = useState(() => {
+		const savedIndex = localStorage.getItem('quiz_index');
+		return savedIndex ? parseInt(savedIndex, 10) : 0;
+	});
 	const [searchParams] = useSearchParams();
 	const { category, difficulty } = Object.fromEntries(searchParams);
-	const [answers, setAnswers] = useState<AnswerType[]>([{
-		typeAnswer: '',
-		answer: '',
-	}]);
+	const [answers, setAnswers] = useState<AnswerType[]>(() => {
+		const savedAnswers = localStorage.getItem('quiz_answers');
+		return savedAnswers ? JSON.parse(savedAnswers) : [];
+	});
+	console.log(answers);
 
 	const { data, isLoading, isError } = useQuery({
 		queryKey: [category, difficulty],
-		queryFn: () => fetchData(category, difficulty),
+		queryFn: async () => await fetchData(category as string, difficulty as string),
 	});
 
 	useEffect(() => {
-		if (data) {
-			setAnswers(Array(data.length).fill({ typeAnswer: '', answer: '' }));
-		}
-	}, [data]);
+		localStorage.setItem('quiz_index', index.toString());
+		localStorage.setItem('quiz_answers', JSON.stringify(answers));
+	}, [index, answers]);
 
 	const totalQuestions = data?.length ?? 0;
-	const progress = totalQuestions > 0 ? ((index + 1) / totalQuestions) * 100 : 0;
+	const progress = useMemo(() => {
+		return totalQuestions > 0 ? ((index + 1) / totalQuestions) * 100 : 0;
+	}, [index, totalQuestions]);
 
-	const handleSelectAnswer = useCallback((option: string, type: string) => {
+	const handleSelectAnswer = useCallback(
+		(option: string, type: string) => {
 			setAnswers((prev) => {
 				const updated = [...prev];
 				updated[index] = { typeAnswer: type, answer: option };
 				return updated;
 			});
-		},[index]);
+		},
+		[index]
+	);
 
 	const handleNext = useCallback(() => {
 		if (index < totalQuestions - 1) {
@@ -84,7 +93,7 @@ function QuizContents() {
 					<div className="sm:col-span-3 flex flex-col justify-between gap-4">
 						<div className="flex justify-between">
 							<div className="text-2xl px-4 py-2 border-1 w-fit rounded-md">
-								{index + 1}/{totalQuestions}
+								{index + 1} / <span className="font-semibold">{totalQuestions}</span>
 							</div>
 							{isLoading ? (
 								<p>Loading</p>
@@ -116,16 +125,8 @@ function QuizContents() {
 									if (!option || option.trim() === '') return null;
 
 									return (
-										<motion.div
-											key={opt}
-											onClick={() => handleSelectAnswer(option, typeAnswer)}
-											className="flex justify-between items-center border-1 border-slate-400 rounded-md dark:border-slate-600 p-4 gap-4">
-											<Checkbox
-												id={option}
-												className="cursor-pointer"
-												checked={answers[index]?.answer === option}
-												onCheckedChange={() => handleSelectAnswer(option, typeAnswer)}
-											/>
+										<motion.div key={opt} onClick={() => handleSelectAnswer(option, typeAnswer)} className="flex justify-between items-center border-1 border-slate-400 rounded-md dark:border-slate-600 p-4 gap-4">
+											<Checkbox id={option} className="cursor-pointer" checked={answers[index]?.answer === option} onCheckedChange={() => handleSelectAnswer(option, typeAnswer)} />
 											<Label htmlFor={option} className="w-full cursor-pointer h-full text-base font-medium">
 												{option}
 											</Label>
