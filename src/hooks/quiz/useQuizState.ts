@@ -12,7 +12,9 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         return savedIndex ? parseInt(savedIndex, 10) : 0;
     });
 
-    const handleIndexValue = index < 0 ? index + 1 : index;
+    const handleIndexValue = index < 0 ? index + 1 : (index > data?.length - 1 ? index - 1 : index);
+    console.log(handleIndexValue);
+
     const totalQuestions = data?.length ?? 0;
     const progress = useMemo(() => {
         return totalQuestions > 0 ? ((handleIndexValue + 1) / totalQuestions) * 100 : 0;

@@ -1,31 +1,16 @@
 import { HomeLayout } from '@/components/layouts/home';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { Title } from '@/components/common/title';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'motion/react';
+import { useFinishState } from '@/hooks/quiz/useFinishState';
 
 function FinishContent() {
-	const navigate = useNavigate();
-	const score = localStorage.getItem('quiz_correct_answers');
-
-	const resetQuizProgress = useCallback(() => {
-		localStorage.removeItem('quiz_index');
-		localStorage.removeItem('quiz_answers');
-		localStorage.removeItem('quiz_end_time');
-		localStorage.removeItem('quiz_finished');
-		localStorage.removeItem('quiz_correct_answers');
-	}, []);
-
-	const handleHome = useCallback(() => {
-		resetQuizProgress();
-		navigate('/');
-	}, [navigate, resetQuizProgress]);
-
-	const handleTryAgain = useCallback(() => {
-		resetQuizProgress();
-		navigate('/start-quiz');
-	}, [navigate, resetQuizProgress]);
+	const {
+		score,
+		handleHome,
+		handleTryAgain
+	} = useFinishState();
 
 	return (
 		<HomeLayout id="finish" className="py-8 px-4 sm:px-6 lg:px-8">
