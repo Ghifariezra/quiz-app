@@ -44,6 +44,7 @@ export const useFinishState = () => {
         handleHome,
         handleTryAgain,
         handleDownloadImage,
-        captureRef
+        captureRef,
+        resetQuizProgress
      };
 }
