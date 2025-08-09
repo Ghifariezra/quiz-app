@@ -23,7 +23,7 @@ function Header() {
 			</motion.div>
 			<AnimatePresence>
 				{isOpen && (
-					<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="sm:hidden block py-4">
+					<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="sm:hidden block py-4">
 						<MenuComponent />
 					</motion.div>
 				)}

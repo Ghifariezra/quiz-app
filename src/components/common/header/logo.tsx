@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 export const LogoComponent = memo(() => {
-	const LogoName = 'Quiz App';
+	const LogoName = 'Tech Playground';
 
 	return (
 		<Link to={'/'}>
