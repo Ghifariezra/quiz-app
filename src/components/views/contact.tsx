@@ -10,7 +10,7 @@ import { useContact } from '@/hooks/contact/useContact';
 
 export default function ContactSection() {
 	const actionData = useActionData() as { error?: string; message?: string };
-	const { name, setName, email, setEmail, message, setMessage } = useContact({ action: actionData });
+	const { showMessage, showError, name, setName, email, setEmail, message, setMessage } = useContact({ action: actionData });
 
 	return (
 		<HomeLayout id="contact" className="py-8">
@@ -20,17 +20,18 @@ export default function ContactSection() {
 				<motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={formVariants}>
 					<Form method="POST" action="/contact" className="space-y-4 !text-slate-900 dark:!text-slate-50">
 						<AnimatePresence mode="wait">
-							{actionData?.error && (
-								<motion.p key="error" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }} className="text-sm text-red-500 bg-red-100 rounded-md p-2 text-center">
+							{showError && actionData?.error && (
+								<motion.p key="error" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }} exit={{ opacity: 0, y: -20 }} className="text-sm text-red-500 bg-red-100 rounded-md p-2 text-center">
 									{actionData.error}
 								</motion.p>
 							)}
-							{actionData?.message && (
+							{showMessage && actionData?.message && (
 								<motion.p
 									key="message"
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.5, ease: 'easeInOut' }}
+									exit={{ opacity: 0, y: -20 }}
 									className="text-sm text-green-600 bg-green-100 rounded-md p-2 text-center">
 									{actionData.message}
 								</motion.p>

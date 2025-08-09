@@ -2,6 +2,9 @@ import { useState, useCallback, useEffect } from "react";
 
 export const useContact = ({ action }: { action: { error?: string; message?: string } }
 ) => {
+    const [showMessage, setShowMessage] = useState(false);
+    const [showError, setShowError] = useState(false);
+
     // state untuk form
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,7 +23,25 @@ export const useContact = ({ action }: { action: { error?: string; message?: str
         }
     }, [action, resetForm]);
 
+    useEffect(() => {
+        if (action?.message) {
+            setShowMessage(true);
+            const timer = setTimeout(() => setShowMessage(false), 3000); // hilang 3 detik
+            return () => clearTimeout(timer);
+        }
+    }, [action]);
+
+    useEffect(() => {
+        if (action?.error) {
+            setShowError(true);
+            const timer = setTimeout(() => setShowError(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [action]);
+
     return {
+        showMessage,
+        showError,
         name,
         setName,
         email,
