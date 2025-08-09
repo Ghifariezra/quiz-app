@@ -12,10 +12,11 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         return savedIndex ? parseInt(savedIndex, 10) : 0;
     });
 
+    const handleIndexValue = index < 0 ? index + 1 : index;
     const totalQuestions = data?.length ?? 0;
     const progress = useMemo(() => {
-        return totalQuestions > 0 ? ((index + 1) / totalQuestions) * 100 : 0;
-    }, [index, totalQuestions]);
+        return totalQuestions > 0 ? ((handleIndexValue + 1) / totalQuestions) * 100 : 0;
+    }, [handleIndexValue, totalQuestions]);
 
     const [answers, setAnswers] = useState<AnswerType[]>(() => {
         const savedAnswers = localStorage.getItem('quiz_answers');
@@ -53,8 +54,6 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         if (index > 0) {
             setIndex((prev) => prev - 1);
         }
-        // Bug fix when Double click Back button
-        return;
     }, [index]);
 
     // Fungsi untuk menyelesaikan kuis
@@ -65,6 +64,7 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
             // Memeriksa apakah jawaban yang dipilih sesuai dengan jawaban yang benar
             return data[i]?.correct_answer.includes(answer?.typeAnswer)
         }).length;
+        console.log(correct_answers);
         const total_score = data.length > 0 ? (correct_answers / data.length) * 100 : 0;
 
         navigate('/quiz/finish', { replace: true });
@@ -95,7 +95,7 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         }, [handleBack]);
 
     return {
-        index,
+        handleIndexValue,
         answers,
         handleSelectAnswer,
         handleFinish,

@@ -6,7 +6,7 @@ class QuizData {
         const { data, error } = await supabase
             .from(path.toLowerCase())
             .select("*")
-            .eq("difficulty", difficulty).limit(5);
+            .eq("difficulty", difficulty).limit(2);
 
         if (error) {
             console.error("Supabase error:", error);

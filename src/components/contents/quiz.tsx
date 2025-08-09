@@ -24,7 +24,7 @@ function QuizContents() {
 	});
 
 	// Memanggil custom hook untuk mengelola state dan handler
-	const { index, answers, handleSelectAnswer, handleFinish, handleNextWithScroll, handleBackWithScroll, questionContainerRef, totalQuestions, progress } = useQuizState({ data } as { data: Record<string, string>[] });
+	const { handleIndexValue, answers, handleSelectAnswer, handleFinish, handleNextWithScroll, handleBackWithScroll, questionContainerRef, totalQuestions, progress } = useQuizState({ data } as { data: Record<string, string>[] });
 
 	if (isLoading)
 		return (
@@ -39,8 +39,8 @@ function QuizContents() {
 				<h1>Error Fetching Data</h1>
 			</HomeLayout>
 		);
-
-	const currentQuestion = data?.[index];
+	
+	const currentQuestion = data?.[handleIndexValue];
 
 	return (
 		<HomeLayout id="quiz" className="py-8">
@@ -56,7 +56,7 @@ function QuizContents() {
 					<div className="sm:col-span-3 flex flex-col justify-between gap-4">
 						<div className="flex justify-between">
 							<div className="text-2xl px-4 py-2 border-1 w-fit rounded-md">
-								{index + 1} / <span className="font-semibold">{totalQuestions}</span>
+								{handleIndexValue} / <span className="font-semibold">{totalQuestions}</span>
 							</div>
 							<div className="sticky inset-0 flex items-center justify-center sm:justify-start gap-4 w-fit px-4 py-2 border-1 rounded-md text-slate-900 dark:text-slate-50">
 								<AlarmClock />
@@ -73,7 +73,7 @@ function QuizContents() {
 				{/* Questions */}
 				<div className="flex flex-col gap-8">
 					{currentQuestion && (
-						<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} key={index} className="flex flex-col gap-4">
+						<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} key={handleIndexValue} className="flex flex-col gap-4">
 							<div className="border-1 border-slate-400 rounded-md dark:border-slate-600 bg-slate-200 dark:bg-slate-800 p-4 whitespace-pre-wrap">{currentQuestion.question}</div>
 
 							{/* Answer Options */}
@@ -86,7 +86,7 @@ function QuizContents() {
 									return (
 										<motion.div key={opt} onClick={() => handleSelectAnswer(option, typeAnswer)} className="flex justify-between items-center border-1 border-slate-400 rounded-md dark:border-slate-600 px-4 py-2 gap-4">
 											<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-												<Checkbox id={option} className="cursor-pointer" checked={answers[index]?.answer === option} onCheckedChange={() => handleSelectAnswer(option, typeAnswer)} />
+												<Checkbox id={option} className="cursor-pointer" checked={answers[handleIndexValue]?.answer === option} onCheckedChange={() => handleSelectAnswer(option, typeAnswer)} />
 											</motion.div>
 											<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="w-full h-full">
 												<Label htmlFor={option} className="cursor-pointer text-base font-medium">
@@ -102,17 +102,17 @@ function QuizContents() {
 
 					{/* Navigation Buttons */}
 					<div className="flex justify-end gap-4">
-						<AnimatePresence mode="wait">
-							{index > 0 && (
+						<AnimatePresence mode="wait" initial={false}>
+							{handleIndexValue > 0 && (
 								<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: 'easeInOut' }} exit={{ opacity: 0, y: 10 }}>
-									<Button className="cursor-pointer" onClick={handleBackWithScroll}>
+									<Button onClick={handleBackWithScroll} disabled={handleIndexValue <= 0} className="cursor-pointer">
 										Back
 									</Button>
 								</motion.div>
 							)}
 						</AnimatePresence>
 						<AnimatePresence mode="wait">
-							{index === totalQuestions - 1 ? (
+							{handleIndexValue === totalQuestions - 1 ? (
 								<motion.div key="submit" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.7, ease: 'easeInOut' }}>
 									<Button className="cursor-pointer" onClick={handleFinish}>
 										Submit
@@ -120,7 +120,7 @@ function QuizContents() {
 								</motion.div>
 							) : (
 								<motion.div key="next" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.7, ease: 'easeInOut' }}>
-									<Button className="cursor-pointer" onClick={handleNextWithScroll} disabled={index >= totalQuestions - 1}>
+									<Button className="cursor-pointer" onClick={handleNextWithScroll} disabled={handleIndexValue >= totalQuestions - 1}>
 										Next
 									</Button>
 								</motion.div>
