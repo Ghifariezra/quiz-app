@@ -1,28 +1,15 @@
-import { HomeLayout } from '@/components/layouts/home';
+import { HomeLayout } from '@/components/template/home';
 import { ImageGroups } from '@/components/common/categories/image-groups';
-import { useState, useCallback } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ImageQuiz, Difficultys } from '@/utilities/categories';
 import { memo } from 'react';
 import { DifficultyDropdown } from '@/components/common/categories/dropdown';
 import { Title } from '@/components/common/title';
 import { motion, AnimatePresence } from 'motion/react';
+import { useCategories } from '@/hooks/categories/useCategories';
 
 function QuizContents() {
-	const [diff, setDiff] = useState<string>(Difficultys[0]);
-	const [dropdown, setDropdown] = useState<boolean>(false);
-
-	const getDiff = useCallback(
-		(diff: string) => {
-			setDiff(diff);
-		},
-		[setDiff]
-	);
-
-	const handleDropdown = useCallback(() => {
-		setDropdown(!dropdown);
-	}, [dropdown]);
-
+	const { diff, dropdown, getDiff, handleDropdown } = useCategories();
 	return (
 		<HomeLayout id="categories" className="py-8">
 			<div className="flex flex-col sm:grid sm:grid-cols-4 gap-4">

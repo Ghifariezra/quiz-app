@@ -1,4 +1,4 @@
-import { HomeLayout } from '@/components/layouts/home';
+import { HomeLayout } from '@/components/template/home';
 import { memo } from 'react';
 import { Title } from '@/components/common/title';
 import { Button } from '@/components/ui/button';

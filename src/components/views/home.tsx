@@ -1,20 +1,11 @@
-import { HomeLayout } from '@/components/layouts/home';
+import { HomeLayout } from '@/components/template/home';
 import { motion } from 'motion/react';
 import { ButtonGroups } from '@/components/common/home/button';
 import { memo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useHome } from '@/hooks/home/useHome';
 
 function HomeContents () {
-	const navigate = useNavigate();
- 
-	const handleButtonClick = useCallback(
-		(path: string) => {
-			navigate(path);
-		},
-		[navigate]
-	);
-
+	const { handleButtonClick } = useHome();
 	return (
 		<HomeLayout id="home" className="py-8 overflow-hidden">
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -1,4 +1,4 @@
-import { HomeLayout } from '@/components/layouts/home';
+import { HomeLayout } from '@/components/template/home';
 import { motion, AnimatePresence } from 'motion/react';
 import { memo } from 'react';
 import { useSearchParams } from 'react-router-dom';

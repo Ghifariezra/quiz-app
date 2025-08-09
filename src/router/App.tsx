@@ -1,16 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
+import { formContactAction } from '@/hooks/contact/useFormContact';
 
 const Loading = lazy(() => import('@/components/shared/loading'));
 const MainLayout = lazy(() => import('@/components/layouts/main'));
-const Home = lazy(() => import('@/components/contents/home'));
-const About = lazy(() => import('@/components/contents/about'));
-const Categories = lazy(() => import('@/components/contents/categories'));
-const Quiz = lazy(() => import('@/components/contents/quiz'));
-const FinishProtectedRoute = lazy(() => import('@/components/contents/finish/protect-route'));
-const Finish = lazy(() => import('@/components/contents/finish/finish'));
-const Contact = lazy(() => import('@/components/contents/contact'));
+const Home = lazy(() => import('@/components/views/home'));
+const About = lazy(() => import('@/components/views/about'));
+const Categories = lazy(() => import('@/components/views/categories'));
+const Quiz = lazy(() => import('@/components/views/quiz'));
+const FinishProtectedRoute = lazy(() => import('@/components/views/finish/protect-route'));
+const Finish = lazy(() => import('@/components/views/finish/finish'));
+const Contact = lazy(() => import('@/components/views/contact'));
 
 const router = createBrowserRouter([
 	{
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
 						<Contact />
 					</Suspense>
 				),
+				action: formContactAction,
 			},
 		],
 	},
