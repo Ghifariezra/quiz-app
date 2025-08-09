@@ -23,7 +23,7 @@ function AboutContents() {
 							<AboutTitle />
 							<p className="description sm:!text-justify">
 								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.2 }}>
-									Quiz App is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking,
+									Tech Playground is an interactive platform designed to help students, professionals, and tech enthusiasts test and enhance their knowledge. Covering a wide range of topics such as Linux, DevOps, Networking,
 									Cloud, Docker, Kubernetes, and various programming languages, Quiz App provides a fun and engaging way to learn and grow your skills.
 								</motion.span>
 								<br /> <br />
@@ -36,7 +36,7 @@ function AboutContents() {
 								</motion.span>
 								<br /> <br />
 								<motion.span initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.5 }}>
-									Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Quiz App — where knowledge meets challenge.
+									Join the community of learners and tech enthusiasts today, and make your learning journey more exciting with Tech Playground — where knowledge meets challenge.
 								</motion.span>
 							</p>
 						</div>
