@@ -12,6 +12,7 @@ export const useQuizState = ({ data }: { data: Record<string, string>[] }) => {
         return savedIndex ? parseInt(savedIndex, 10) : 0;
     });
 
+    // Handle index when user try to double click
     const handleIndexValue = index < 0 ? index + 1 : (index > data?.length - 1 ? index - 1 : index);
     console.log(handleIndexValue);
 

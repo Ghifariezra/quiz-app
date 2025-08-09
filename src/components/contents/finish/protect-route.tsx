@@ -5,7 +5,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
 	if (!quizFinished) {
 		// Kalau belum selesai kuis, redirect ke halaman awal atau quiz
-		return <Navigate to="/quiz/finish"/>;
+		return <Navigate to="/quiz/finish" replace />;
 	}
 
 	return children;
