@@ -13,13 +13,13 @@ function FinishContent() {
 		<HomeLayout id="finish" className="py-8 px-4 sm:px-6 lg:px-8">
 			<motion.div className="flex flex-col items-center text-center gap-4 sm:gap-6 max-w-2xl mx-auto" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }}>
 				<motion.div ref={captureRef} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }} className="flex flex-col gap-4 sm:gap-6 px-4 py-8">
-					<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }} className="relative inset-0 flex justify-end">
+					<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }} className="relative inset-0 flex justify-center sm:justify-end">
 						<motion.div
 							data-html2canvas-ignore="true"
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.9 }}
 							transition={{ duration: 0.5, ease: 'easeInOut' }}
-							className="w-fit flex bg-slate-100 dark:bg-slate-800 rounded-md p-2 cursor-pointer border">
+							className="relative z-10 -top-12 sm:top-0 w-fit flex bg-slate-100 dark:bg-slate-800 rounded-md p-2 cursor-pointer border">
 							<Download className="w-6 h-6" onClick={handleDownloadImage} />
 						</motion.div>
 						<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: 'easeOut' }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
