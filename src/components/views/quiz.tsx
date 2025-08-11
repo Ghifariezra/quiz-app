@@ -18,10 +18,11 @@ function QuizContents() {
 	const [searchParams] = useSearchParams();
 	const { category, difficulty } = Object.fromEntries(searchParams);
 
-	const { data, isLoading, isError } = useQuery({
+	const { data : d, isLoading, isError } = useQuery({
 		queryKey: [category, difficulty],
 		queryFn: async () => await fetchData(category as string, difficulty as string),
 	});
+	const data = d?.sort(() => Math.random() - 0.5);
 
 	// Memanggil custom hook untuk mengelola state dan handler
 	const { handleIndexValue, answers, handleSelectAnswer, handleFinish, handleNextWithScroll, handleBackWithScroll, questionContainerRef, totalQuestions, progress } = useQuizState({ data } as { data: Record<string, string>[] });
