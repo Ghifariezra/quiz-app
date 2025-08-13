@@ -1,6 +1,6 @@
 import { HomeLayout } from '@/components/template/home';
 import { motion, AnimatePresence } from 'motion/react';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Progress } from '@/components/ui/progress';
@@ -22,7 +22,11 @@ function QuizContents() {
 		queryKey: [category, difficulty],
 		queryFn: async () => await fetchData(category as string, difficulty as string),
 	});
-	const data = d?.sort(() => Math.random() - 0.5);
+
+	const data = useMemo(() => {
+		if (!d) return [];
+		return [...d].sort(() => Math.random() - 0.5);
+	}, [d]);
 
 	// Memanggil custom hook untuk mengelola state dan handler
 	const { handleIndexValue, answers, handleSelectAnswer, handleFinish, handleNextWithScroll, handleBackWithScroll, questionContainerRef, totalQuestions, progress } = useQuizState({ data } as { data: Record<string, string>[] });
